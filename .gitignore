@@ -215,17 +215,6 @@ Thumbs.db
 #bitrise
 .bitrise*
 
-#Partners/Partners/Constants/PrivateKeys.cs
 Local/
 
-
-packages/signing/Certificates.p12
-
-packages/signing/Consulting_Partners_Development_Profile.mobileprovision
-
-packages/signing/Consulting_Partners_Universal_Profile.mobileprovision
-
-packages/signing/Xamarin_Nick_Courad.p12
-
-packages/signing/xamarin-partners.keystore
-/Partners/.vs/config
+NomadCode.Azure/NomadCode.Dev
