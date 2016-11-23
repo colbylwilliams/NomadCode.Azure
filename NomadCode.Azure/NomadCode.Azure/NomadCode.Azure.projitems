@@ -19,6 +19,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)AzureClient\AzureClient_GetLookup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AzureClient\AzureClient_InsertUpdate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AzureClient\AzureClient_KeyStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AzureClient\AzureClient_CRUD.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AzureClient\Log.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)AzureClient\" />

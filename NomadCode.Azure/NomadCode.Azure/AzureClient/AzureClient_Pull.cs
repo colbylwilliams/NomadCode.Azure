@@ -21,9 +21,9 @@ namespace NomadCode.Azure
 
 
 #if OFFLINE_SYNC_ENABLED
-		void Pull<T> (IMobileServiceSyncTable<T> table, Expression<Func<T, bool>> where = null)
+		void sync<T> (IMobileServiceSyncTable<T> table, Expression<Func<T, bool>> where = null)
 #else
-		void Pull<T> (IMobileServiceTable<T> table, Expression<Func<T, bool>> where = null)
+		void sync<T> (IMobileServiceTable<T> table, Expression<Func<T, bool>> where = null)
 #endif
 			where T : AzureEntity, new()
 		{
@@ -31,7 +31,7 @@ namespace NomadCode.Azure
 			// we want to fire and forget
 			Task.Run (async () =>
 			{
-				await PullAsync (table, where);
+				await syncAsync (table, where);
 
 				try
 				{
@@ -40,7 +40,7 @@ namespace NomadCode.Azure
 					{
 						performingFullRefresh = true;
 
-						await GetAllAsync<T> ();
+						await getAsync<T> (null);
 
 						lastRefresh = DateTime.UtcNow;
 
@@ -58,9 +58,9 @@ namespace NomadCode.Azure
 
 
 #if OFFLINE_SYNC_ENABLED
-		async Task PullAsync<T> (IMobileServiceSyncTable<T> table, Expression<Func<T, bool>> where = null)
+		async Task syncAsync<T> (IMobileServiceSyncTable<T> table, Expression<Func<T, bool>> where = null)
 #else
-		async Task PullAsync<T> (IMobileServiceTable<T> table, Expression<Func<T, bool>> where = null)
+		async Task syncAsync<T> (IMobileServiceTable<T> table, Expression<Func<T, bool>> where = null)
 #endif
 		where T : AzureEntity, new()
 		{

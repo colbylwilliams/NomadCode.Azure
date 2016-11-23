@@ -21,9 +21,9 @@ namespace NomadCode.Azure
 	{
 
 #if OFFLINE_SYNC_ENABLED
-		async Task<List<T>> GetAsync<T> (IMobileServiceSyncTable<T> table, Expression<Func<T, bool>> where = null)
+		async Task<List<T>> getAsync<T> (IMobileServiceSyncTable<T> table, Expression<Func<T, bool>> where = null)
 #else
-		async Task<List<T>> GetAsync<T> (IMobileServiceTable<T> table, Expression<Func<T, bool>> where = null)
+		async Task<List<T>> getAsync<T> (IMobileServiceTable<T> table, Expression<Func<T, bool>> where = null)
 #endif
 			where T : AzureEntity, new()
 		{
@@ -59,15 +59,15 @@ namespace NomadCode.Azure
 
 
 #if OFFLINE_SYNC_ENABLED
-		async Task<T> GetFirstOrDefault<T> (IMobileServiceSyncTable<T> table, Expression<Func<T, bool>> where)
+		async Task<T> getFirstOrDefault<T> (IMobileServiceSyncTable<T> table, Expression<Func<T, bool>> where)
 #else
-		async Task<T> GetFirstOrDefault<T> (IMobileServiceTable<T> table, Expression<Func<T, bool>> where)
+		async Task<T> getFirstOrDefault<T> (IMobileServiceTable<T> table, Expression<Func<T, bool>> where)
 #endif
 			where T : AzureEntity, new()
 		{
 			try
 			{
-				var allItems = await GetAsync (table, where);
+				var allItems = await getAsync (table, where);
 
 				return allItems.FirstOrDefault ();
 			}
@@ -79,9 +79,9 @@ namespace NomadCode.Azure
 
 
 #if OFFLINE_SYNC_ENABLED
-		async Task<T> LookupItemAsync<T> (IMobileServiceSyncTable<T> table, string itemId)
+		async Task<T> lookupItemAsync<T> (IMobileServiceSyncTable<T> table, string itemId)
 #else
-		async Task<T> LookupItemAsync<T> (IMobileServiceTable<T> table, string itemId)
+		async Task<T> lookupItemAsync<T> (IMobileServiceTable<T> table, string itemId)
 #endif
 		where T : AzureEntity, new()
 		{

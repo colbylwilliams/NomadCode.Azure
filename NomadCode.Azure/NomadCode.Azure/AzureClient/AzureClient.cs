@@ -19,7 +19,7 @@ namespace NomadCode.Azure
 	{
 		const string dbPath = @"nomad.db";
 
-		static string appUri { get; set; }
+		static Uri appUri { get; set; }
 
 		static AzureClient _shared;
 		public static AzureClient Shared => _shared ?? (_shared = new AzureClient ());
@@ -29,6 +29,7 @@ namespace NomadCode.Azure
 		static MobileServiceClient Client => _client ?? (_client = new MobileServiceClient (appUri));
 
 
+		#region tables
 
 #if OFFLINE_SYNC_ENABLED
 
@@ -79,6 +80,8 @@ namespace NomadCode.Azure
 
 #endif
 
+		#endregion
+
 		AzureClient ()
 		{
 			CurrentPlatform.Init ();
@@ -103,7 +106,19 @@ namespace NomadCode.Azure
 
 		public async Task InitializeAzync (string mobileAppUri)
 		{
-			appUri = mobileAppUri;
+			if (string.IsNullOrWhiteSpace (mobileAppUri))
+			{
+				throw new ArgumentException ("Cannot be null, empty, or whitespace.", nameof (mobileAppUri));
+			}
+
+			Uri uri;
+
+			if (!Uri.TryCreate (mobileAppUri, UriKind.Absolute, out uri))
+			{
+				throw new ArgumentException ("Invalid Url", nameof (mobileAppUri));
+			}
+
+			appUri = uri;
 
 			if (!Client.SyncContext.IsInitialized)
 			{
@@ -118,85 +133,26 @@ namespace NomadCode.Azure
 			}
 		}
 
-#endif
+#else
 
-
-
-#if OFFLINE_SYNC_ENABLED
-
-		public async Task PullAllAsync<T> ()
-			where T : AzureEntity, new()
+		public void Initialize (string mobileAppUri)
 		{
-			await PullAsync (getTable<T> ());
-		}
-
-#endif
-
-		public async Task<List<T>> GetAllAsync<T> ()
-			where T : AzureEntity, new()
-		{
-			return await GetAsync (getTable<T> ());
-		}
-
-
-		public async Task SaveAsync<T> (T item)
-			where T : AzureEntity, new()
-		{
-			await InsertOrUpdateAsync (getTable<T> (), item);
-		}
-
-
-		public async Task SaveAllAsync<T> (List<T> items)
-			where T : AzureEntity, new()
-		{
-#if DEBUG
-			var sw = new System.Diagnostics.Stopwatch ();
-			sw.Start ();
-#endif
-			var table = getTable<T> ();
-
-			foreach (var item in items)
+			if (string.IsNullOrWhiteSpace (mobileAppUri))
 			{
-				await InsertOrUpdateAsync (table, item, null, false);
+				throw new ArgumentException ("Cannot be null, empty, or whitespace.", nameof (mobileAppUri));
 			}
 
-#if OFFLINE_SYNC_ENABLED
-			Pull (table);
+			Uri uri;
+
+			if (!Uri.TryCreate (mobileAppUri, UriKind.Absolute, out uri))
+			{
+				throw new ArgumentException ("Invalid Url", nameof (mobileAppUri));
+			}
+
+			appUri = uri;
+		}
+
 #endif
-
-#if DEBUG
-			sw.Stop ();
-			LogDebug<T> (sw.ElapsedMilliseconds);
-#endif
-		}
-
-
-#region Log Utility
-
-		void Log (string message) => Console.WriteLine (message);
-
-#if DEBUG
-		void LogDebug (string message, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "", [System.Runtime.CompilerServices.CallerLineNumber] int sourceLineNumber = 0)
-		{
-			System.Diagnostics.Debug.WriteLine ($"[{DateTime.Now:MM/dd/yyyy h:mm:ss.fff tt}] [{GetType ().Name}] [{memberName}] [{sourceLineNumber}] :: {message}");
-		}
-
-		void LogDebug<T> (Exception ex, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "", [System.Runtime.CompilerServices.CallerLineNumber] int sourceLineNumber = 0)
-		{
-			var message = $"{memberName} for type '{typeof (T).Name}' failed with error: {(ex.InnerException ?? ex).Message}";
-
-			System.Diagnostics.Debug.WriteLine ($"[{DateTime.Now:MM/dd/yyyy h:mm:ss.fff tt}] [{GetType ().Name}] [{memberName}] [{sourceLineNumber}] :: {message}");
-		}
-
-		void LogDebug<T> (long ms, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "", [System.Runtime.CompilerServices.CallerLineNumber] int sourceLineNumber = 0)
-		{
-			var message = $"{memberName} for {typeof (T).Name} took {ms} milliseconds";
-
-			System.Diagnostics.Debug.WriteLine ($"[{DateTime.Now:MM/dd/yyyy h:mm:ss.fff tt}] [{GetType ().Name}] [{memberName}] [{sourceLineNumber}] :: {message}");
-		}
-#endif
-
-#endregion
 	}
 }
 #endif

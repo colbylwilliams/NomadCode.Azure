@@ -1,1 +1,96 @@
 # NomadCode.Azure
+
+NomadCode.Azure is a very simple [shared project][0] that simplifies Azure Mobile Apps.
+
+## Installation
+
+To use in your project, you can eiter, clone, [download][1], etc. and simply reference it from your project.
+
+Or if you're using Git, you can add it as a submodule with the following command:
+
+```shell
+cd /path/to/your/projects/root
+
+git submodule add https://github.com/colbylwilliams/NomadCode.Azure NomadCode.Azure
+```
+
+## Use
+
+NomadCode.Azure only has two classes: `AzureEntity` and `AzureClient`.
+
+`AzureEntity` should be used as the base class for any type stored Azure Mobile Apps.
+
+`AzureClient` is the class you'll use to interact with your Azure Mobile Apps data, auth, etc.
+
+### Offline sync
+
+NomadCode.Azure supports using Azure Mobile Apps with and without offline sync.
+
+*To enable offline sync, add `OFFLINE_SYNC_ENABLED` to the preprocessor directives of any consuming projects. 
+
+
+### Initialization
+
+Before performing any CRUD opporations, you must initialize the `AzureClient`.  Initialization is a bit different depending on whether or not your app will support offline sync.   
+
+
+#### With Offline sync
+
+If your app supports offline sync, you initialize the `AzureClient` by first calling `RegisterTable` on each type you will use with Azure Mobile Apps. Then call `InitializeAzync`, passing in the url of your Azure Mobile Apps instance.
+
+```C#
+AzureClient.Shared.RegisterTable<User> ();
+AzureClient.Shared.RegisterTable<Vendor> ();
+// ...the rest of your types
+
+await AzureClient.Shared.InitializeAzync ("https://{your-app}.azurewebsites.net");
+```
+
+#### Without Offline sync
+
+If your app does not support offline sync, simply call `Initialize`, passing in the url of your Azure Mobile Apps instance like in the expample below:
+
+```C#
+AzureClient.Shared.Initialize ("https://{your-app}.azurewebsites.net");
+```
+
+### Authentication
+
+
+
+### CRUD
+
+Once the `AzureClient` is initialized, you can use the methods below to perform CRUD opperations on your data:
+
+```C#
+AzureClient client = AzureClient.Shared;
+
+
+await client.SyncAsync<User> ();                                // pushes local and pulls remote changes
+
+
+await client.GetAsync<User> ("12345");                          // returns User.Id == "12345
+
+await client.GetAsync<User> ();                                 // returns the all user objects
+
+await client.GetAsync<User> (u => u.Age < 34);                  // returns users where age < 34
+
+await client.FirstOrDefault<User> (u => u.Name == "Colby");     // returns first user with name "Colby"
+
+
+await client.SaveAsync (user);                                  // inserts or updates new user
+
+await client.SaveAsync (new List<User> { user });               // inserts or updates each user in a list
+
+
+await client.DeleteAsync<User> ("12345");                       // deletes User with User.Id == "12345
+
+await client.DeleteAsync (user);                                // deletes the user
+
+await client.DeleteAsync (new List<User> { user });             // deletes each user in a list
+
+await client.DeleteAsync<User> (u => u.Age < 34);               // deletes all users where age < 34
+```
+
+[0]:https://developer.xamarin.com/guides/cross-platform/application_fundamentals/shared_projects/
+[1]:https://github.com/colbylwilliams/NomadCode.Azure/archive/master.zip
