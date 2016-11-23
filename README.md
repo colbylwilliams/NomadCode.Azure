@@ -2,7 +2,7 @@
 
 `NomadCode.Azure` is a very simple [shared project][0] that simplifies Azure Mobile Apps.
 
-## Installation
+# Installation
 
 To use in your project, you can either, clone, [download][1], etc. and reference your local copy int your project.    
 
@@ -14,7 +14,7 @@ cd /path/to/your/projects/root
 git submodule add https://github.com/colbylwilliams/NomadCode.Azure NomadCode.Azure
 ```
 
-## Use
+# Use
 
 NomadCode.Azure only has two classes: `AzureEntity` and `AzureClient`.
 
@@ -22,19 +22,19 @@ NomadCode.Azure only has two classes: `AzureEntity` and `AzureClient`.
 
 `AzureClient` is the class you'll use to interact with your Azure Mobile Apps data, auth, etc.
 
-### Offline sync
+## Offline sync
 
 `NomadCode.Azure` supports using Azure Mobile Apps with and without offline sync.
 
 **To enable offline sync, add `OFFLINE_SYNC_ENABLED` to the preprocessor directives of any consuming projects.** 
 
 
-### Initialization
+## Initialization
 
 Before performing any CRUD opporations, you must initialize the `AzureClient`.  Initialization is a bit different depending on whether or not your app will support offline sync.   
 
 
-#### With Offline sync
+### With Offline sync
 
 If your app supports offline sync, you initialize the `AzureClient` by first calling `RegisterTable` on each type you will use with Azure Mobile Apps. Then call `InitializeAzync`, passing in the url of your Azure Mobile Apps instance.
 
@@ -46,7 +46,7 @@ AzureClient.Shared.RegisterTable<Vendor> ();
 await AzureClient.Shared.InitializeAzync ("https://{your-app}.azurewebsites.net");
 ```
 
-#### Without Offline sync
+### Without Offline sync
 
 If your app does not support offline sync, simply call `Initialize`, passing in the url of your Azure Mobile Apps instance like in the expample below:
 
@@ -54,7 +54,7 @@ If your app does not support offline sync, simply call `Initialize`, passing in 
 AzureClient.Shared.Initialize ("https://{your-app}.azurewebsites.net");
 ```
 
-### CRUD
+## CRUD
 
 Once the `AzureClient` is initialized, you can use the methods below to perform CRUD opperations on your data:
 
@@ -88,7 +88,7 @@ await client.DeleteAsync (new List<User> { user });             // deletes each 
 await client.DeleteAsync<User> (u => u.Age < 34);               // deletes all users where age < 34
 ```
 
-### Authentication
+## Authentication
 
 `NomadCode.Azure` also supports handeling the [server-managed authentication][2] for your app, incuding storing relevant items in the keychain to silently re-authenticate users later.     
 
