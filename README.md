@@ -4,7 +4,9 @@ NomadCode.Azure is a very simple [shared project][0] that simplifies Azure Mobil
 
 ## Installation
 
-To use in your project, you can either, clone, [download][1], etc. and reference your local copy int your project, orr if you're using Git, you can add it as a submodule with the following command:
+To use in your project, you can either, clone, [download][1], etc. and reference your local copy int your project.    
+
+Or, if you're using Git, you can add it as a submodule with the following command:
 
 ```shell
 cd /path/to/your/projects/root
