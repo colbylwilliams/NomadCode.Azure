@@ -56,7 +56,6 @@ namespace NomadCode.Azure
 			{
 				var query = where == null ? table?.CreateQuery () : table?.Where (where);
 
-				//var queryId = where == null ? null : $"{table?.TableName}{Settings.SyncQueryFormat}";
 				var queryId = where == null ? $"{table?.TableName ?? typeof (T).Name}" : $"{table?.TableName ?? typeof (T).Name}{syncQueryFormat}";
 
 				// pull executed against a table that has pending local updates tracked by the context 

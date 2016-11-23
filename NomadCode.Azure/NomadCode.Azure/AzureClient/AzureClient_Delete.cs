@@ -18,8 +18,6 @@ namespace NomadCode.Azure
 	{
 
 
-
-
 #if OFFLINE_SYNC_ENABLED
 		async Task deleteAsync<T> (IMobileServiceSyncTable<T> table, T item, Expression<Func<T, bool>> where = null, bool pull = true)
 #else
@@ -36,6 +34,7 @@ namespace NomadCode.Azure
 				await table?.DeleteAsync (item);
 
 #if OFFLINE_SYNC_ENABLED
+
 				if (pull)
 				{
 					sync (table, where);
@@ -82,6 +81,7 @@ namespace NomadCode.Azure
 				}
 
 #if OFFLINE_SYNC_ENABLED
+
 				if (pull)
 				{
 					sync (table, where);

@@ -11,13 +11,13 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AzureEntity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AzureClient\AzureClient.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)AzureClient\AzureClient_Authorize.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AzureClient\AzureClient_Auth.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AzureClient\AzureClient_Delete.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)AzureClient\AzureClient_Pull.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)AzureClient\AzureClient_Keychain.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)AzureClient\AzureClient_GetLookup.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)AzureClient\AzureClient_InsertUpdate.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)AzureClient\AzureClient_KeyStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AzureClient\AzureClient_Sync.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AzureClient\Keychain.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AzureClient\AzureClient_Get.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AzureClient\AzureClient_Save.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AzureClient\PreferenceStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AzureClient\AzureClient_CRUD.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AzureClient\Log.cs" />
   </ItemGroup>

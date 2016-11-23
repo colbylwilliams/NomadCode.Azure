@@ -17,6 +17,7 @@ namespace NomadCode.Azure
 	public partial class AzureClient // Insert & Update
 	{
 
+
 #if OFFLINE_SYNC_ENABLED
 		async Task insertAsync<T> (IMobileServiceSyncTable<T> table, T item, Expression<Func<T, bool>> where = null, bool pull = true)
 #else
@@ -33,6 +34,7 @@ namespace NomadCode.Azure
 				await table?.InsertAsync (item);
 
 #if OFFLINE_SYNC_ENABLED
+
 				if (pull)
 				{
 					sync (table, where);
@@ -76,6 +78,7 @@ namespace NomadCode.Azure
 				await table?.UpdateAsync (item);
 
 #if OFFLINE_SYNC_ENABLED
+
 				if (pull)
 				{
 					sync (table, where);
@@ -171,6 +174,7 @@ namespace NomadCode.Azure
 					}
 				}
 #if OFFLINE_SYNC_ENABLED
+
 				if (pull)
 				{
 					sync (table, where);

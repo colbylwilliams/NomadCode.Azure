@@ -13,6 +13,7 @@ namespace NomadCode.Azure
 {
 	public partial class AzureClient // KeyStore
 	{
+
 		const string hyphen = "-";
 
 		const string lastRefreshStorageKey = "LastRefresh";
@@ -24,9 +25,12 @@ namespace NomadCode.Azure
 
 		void setSetting (string key, string value) => StandardUserDefaults.SetString (value, key);
 
+
 		void setSetting (string key, DateTime value) => setSetting (key, value.ToString ());
 
+
 		string stringForKey (string key) => StandardUserDefaults.StringForKey (key);
+
 
 		DateTime dateTimeForKey (string key)
 		{

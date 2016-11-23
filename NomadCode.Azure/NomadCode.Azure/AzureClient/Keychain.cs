@@ -68,7 +68,9 @@ namespace NomadCode.Azure
 
 			SecKeyChain.Remove (record);
 		}
+
 #else
+
 		// to implement, check out the links below:
 		// https://github.com/sameerkapps/SecureStorage/blob/master/SecureStorage/Plugin.SecureStorage.Android/SecureStorageImplementation.cs
 		// https://github.com/xamarin/Xamarin.Auth/blob/portable-bait-and-switch/source/Xamarin.Auth.XamarinAndroid/PlatformSpecific/AndroidAccountStore.cs
