@@ -42,7 +42,7 @@ namespace NomadCode.Azure
 		{
 			if (!Client.SyncContext.IsInitialized)
 			{
-				throw new Exception ("Client isn't Initialized.  Call RegisterTable on each table then call Initialize before perorming CRUD operations.");
+				throw new Exception ("Client isn't Initialized.  Call RegisterTable on each table then call Initialize before performing CRUD operations.");
 			}
 
 			var type = typeof (T);
