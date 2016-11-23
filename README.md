@@ -1,6 +1,6 @@
-# NomadCode.Azure
+# `NomadCode.Azure`
 
-NomadCode.Azure is a very simple [shared project][0] that simplifies Azure Mobile Apps.
+`NomadCode.Azure` is a very simple [shared project][0] that simplifies Azure Mobile Apps.
 
 ## Installation
 
@@ -24,9 +24,9 @@ NomadCode.Azure only has two classes: `AzureEntity` and `AzureClient`.
 
 ### Offline sync
 
-NomadCode.Azure supports using Azure Mobile Apps with and without offline sync.
+`NomadCode.Azure` supports using Azure Mobile Apps with and without offline sync.
 
-*To enable offline sync, add `OFFLINE_SYNC_ENABLED` to the preprocessor directives of any consuming projects. 
+**To enable offline sync, add `OFFLINE_SYNC_ENABLED` to the preprocessor directives of any consuming projects.** 
 
 
 ### Initialization
@@ -90,7 +90,7 @@ await client.DeleteAsync<User> (u => u.Age < 34);               // deletes all u
 
 ### Authentication
 
-NomadCode.Azure also supports handeling the [server-managed authentication][2] for your app, incuding storing relevant items in the keychain to silently re-authenticate users later.     
+`NomadCode.Azure` also supports handeling the [server-managed authentication][2] for your app, incuding storing relevant items in the keychain to silently re-authenticate users later.     
 
 To Authenticate a user, you must first set the `AuthProvider` to the [`MobileServiceAuthenticationProvider`][3] you want to use.
 
