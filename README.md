@@ -1,8 +1,10 @@
 # NomadCode.Azure
 
-`NomadCode.Azure` is a very simple [shared project][0] that simplifies Azure Mobile Apps.
+`NomadCode.Azure` is a very simple library to make working with data in Azure Mobile Apps easier.
 
 # Installation
+
+To make it easy to use anywhere, `NomadCode.Azure` is a [shared project][0] with only a few files.  
 
 To use in your project, you can either, clone, [download][1], etc. and reference your local copy int your project.    
 
