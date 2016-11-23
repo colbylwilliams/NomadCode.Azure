@@ -1,5 +1,4 @@
-﻿//#define OFFLINE_SYNC_ENABLED
-#if __MOBILE__
+﻿#if __MOBILE__
 
 using System;
 using System.Threading.Tasks;
@@ -11,6 +10,7 @@ namespace NomadCode.Azure
 {
 	public partial class AzureClient // Authenticate
 	{
+		public Uri AlternateLoginHost { get; set; }
 
 		public MobileServiceAuthenticationProvider AuthProvider { get; set; } = MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory;
 
@@ -34,9 +34,12 @@ namespace NomadCode.Azure
 #endif
 			try
 			{
-#if !DEBUG
+#if DEBUG
 				// local server can't process auth, so point to the real one
-				Client.AlternateLoginHost = new Uri (PrivateKeys.Azure.AltLoginHost);
+				if (AlternateLoginHost != null)
+				{
+					Client.AlternateLoginHost = AlternateLoginHost;
+				}
 #endif
 				var creds = getItemFromKeychain (AuthProvider.ToString ());
 
@@ -67,13 +70,13 @@ namespace NomadCode.Azure
 			}
 			catch (Exception e)
 			{
-				LogDebug ($"AuthenticateAsync failed : {(e.InnerException ?? e).Message}");
+				logDebug ($"AuthenticateAsync failed : {(e.InnerException ?? e).Message}");
 				return false;
 			}
 			finally
 			{
 				sw.Stop ();
-				LogDebug ($"AuthenticateAsync took {sw.ElapsedMilliseconds} milliseconds");
+				logDebug ($"AuthenticateAsync took {sw.ElapsedMilliseconds} milliseconds");
 #endif
 			}
 		}
@@ -110,13 +113,13 @@ namespace NomadCode.Azure
 			}
 			catch (Exception e)
 			{
-				LogDebug ($"LogoutAsync failed : {(e.InnerException ?? e).Message}");
+				logDebug ($"LogoutAsync failed : {(e.InnerException ?? e).Message}");
 				throw;
 			}
 			finally
 			{
 				sw.Stop ();
-				LogDebug ($"LogoutAsync took {sw.ElapsedMilliseconds} milliseconds");
+				logDebug ($"LogoutAsync took {sw.ElapsedMilliseconds} milliseconds");
 #endif
 			}
 		}

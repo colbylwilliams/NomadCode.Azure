@@ -1,13 +1,12 @@
-﻿//#define OFFLINE_SYNC_ENABLED
-#if __MOBILE__
+﻿#if __MOBILE__
 
 using System;
-using System.Linq.Expressions;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 #if OFFLINE_SYNC_ENABLED
+using System.Linq.Expressions;
 using Microsoft.WindowsAzure.MobileServices.Sync;
-using System.Collections.Generic;
 #else
 using Microsoft.WindowsAzure.MobileServices;
 #endif
@@ -24,7 +23,7 @@ namespace NomadCode.Azure
 #if OFFLINE_SYNC_ENABLED
 		async Task deleteAsync<T> (IMobileServiceSyncTable<T> table, T item, Expression<Func<T, bool>> where = null, bool pull = true)
 #else
-		async Task deleteAsync<T> (IMobileServiceTable<T> table, T item, Expression<Func<T, bool>> where = null, bool pull = true)
+		async Task deleteAsync<T> (IMobileServiceTable<T> table, T item)
 #endif
 			where T : AzureEntity, new()
 		{
@@ -52,13 +51,13 @@ namespace NomadCode.Azure
 			}
 			catch (Exception e)
 			{
-				LogDebug<T> (e);
+				logDebug<T> (e);
 				throw;
 			}
 			finally
 			{
 				sw.Stop ();
-				LogDebug<T> (sw.ElapsedMilliseconds);
+				logDebug<T> (sw.ElapsedMilliseconds);
 #endif
 			}
 		}
@@ -67,7 +66,7 @@ namespace NomadCode.Azure
 #if OFFLINE_SYNC_ENABLED
 		async Task deleteAsync<T> (IMobileServiceSyncTable<T> table, List<T> items, Expression<Func<T, bool>> where = null, bool pull = true)
 #else
-		async Task deleteAsync<T> (IMobileServiceTable<T> table, List<T> item, Expression<Func<T, bool>> where = null, bool pull = true)
+		async Task deleteAsync<T> (IMobileServiceTable<T> table, List<T> items)
 #endif
 			where T : AzureEntity, new()
 		{
@@ -98,13 +97,13 @@ namespace NomadCode.Azure
 			}
 			catch (Exception e)
 			{
-				LogDebug<T> (e);
+				logDebug<T> (e);
 				throw;
 			}
 			finally
 			{
 				sw.Stop ();
-				LogDebug<T> (sw.ElapsedMilliseconds);
+				logDebug<T> (sw.ElapsedMilliseconds);
 #endif
 			}
 		}

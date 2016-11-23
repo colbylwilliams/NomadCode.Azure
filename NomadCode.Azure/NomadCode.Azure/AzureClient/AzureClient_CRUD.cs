@@ -1,18 +1,9 @@
-﻿//#define OFFLINE_SYNC_ENABLED
-#if __MOBILE__
+﻿#if __MOBILE__
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-
-using Microsoft.WindowsAzure.MobileServices;
-
-#if OFFLINE_SYNC_ENABLED
-using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
-using Microsoft.WindowsAzure.MobileServices.Sync;
-#endif
 
 namespace NomadCode.Azure
 {

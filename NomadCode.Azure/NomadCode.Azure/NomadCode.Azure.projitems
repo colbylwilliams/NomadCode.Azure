@@ -15,7 +15,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)AzureClient\AzureClient_Delete.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AzureClient\AzureClient_Pull.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AzureClient\AzureClient_Keychain.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)AzureClient\AzureClient_Config.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AzureClient\AzureClient_GetLookup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AzureClient\AzureClient_InsertUpdate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AzureClient\AzureClient_KeyStore.cs" />

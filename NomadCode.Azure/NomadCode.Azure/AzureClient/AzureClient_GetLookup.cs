@@ -1,5 +1,4 @@
-﻿//#define OFFLINE_SYNC_ENABLED
-#if __MOBILE__
+﻿#if __MOBILE__
 
 using System;
 using System.Collections.Generic;
@@ -46,13 +45,13 @@ namespace NomadCode.Azure
 			}
 			catch (Exception e)
 			{
-				LogDebug<T> (e);
+				logDebug<T> (e);
 				throw;
 			}
 			finally
 			{
 				sw.Stop ();
-				LogDebug<T> (sw.ElapsedMilliseconds);
+				logDebug<T> (sw.ElapsedMilliseconds);
 #endif
 			}
 		}
@@ -101,13 +100,13 @@ namespace NomadCode.Azure
 			}
 			catch (Exception e)
 			{
-				LogDebug<T> (e);
+				logDebug<T> (e);
 				throw;
 			}
 			finally
 			{
 				sw.Stop ();
-				LogDebug<T> (sw.ElapsedMilliseconds);
+				logDebug<T> (sw.ElapsedMilliseconds);
 #endif
 			}
 		}

@@ -1,16 +1,11 @@
-﻿//#define OFFLINE_SYNC_ENABLED
-#if __MOBILE__
+﻿#if __MOBILE__ && OFFLINE_SYNC_ENABLED
 
 using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 using Microsoft.WindowsAzure.MobileServices;
-
-#if OFFLINE_SYNC_ENABLED
 using Microsoft.WindowsAzure.MobileServices.Sync;
-#endif
-
 
 namespace NomadCode.Azure
 {
@@ -19,15 +14,9 @@ namespace NomadCode.Azure
 
 		bool performingFullRefresh;
 
-
-#if OFFLINE_SYNC_ENABLED
 		void sync<T> (IMobileServiceSyncTable<T> table, Expression<Func<T, bool>> where = null)
-#else
-		void sync<T> (IMobileServiceTable<T> table, Expression<Func<T, bool>> where = null)
-#endif
 			where T : AzureEntity, new()
 		{
-#if OFFLINE_SYNC_ENABLED
 			// we want to fire and forget
 			Task.Run (async () =>
 			{
@@ -49,22 +38,16 @@ namespace NomadCode.Azure
 				}
 				catch (Exception ex)
 				{
-					LogDebug<T> (ex);
+					logDebug<T> (ex);
 					lastRefresh = default (DateTime);
 				}
 			});
-#endif
 		}
 
 
-#if OFFLINE_SYNC_ENABLED
 		async Task syncAsync<T> (IMobileServiceSyncTable<T> table, Expression<Func<T, bool>> where = null)
-#else
-		async Task syncAsync<T> (IMobileServiceTable<T> table, Expression<Func<T, bool>> where = null)
-#endif
 		where T : AzureEntity, new()
 		{
-#if OFFLINE_SYNC_ENABLED
 #if DEBUG
 			var sw = new System.Diagnostics.Stopwatch ();
 			sw.Start ();
@@ -133,16 +116,15 @@ namespace NomadCode.Azure
 			}
 			catch (Exception e)
 			{
-				LogDebug<T> (e);
+				logDebug<T> (e);
 				throw;
 			}
 			finally
 			{
 				sw.Stop ();
-				LogDebug<T> (sw.ElapsedMilliseconds);
+				logDebug<T> (sw.ElapsedMilliseconds);
 #endif
 			}
-#endif
 		}
 	}
 }

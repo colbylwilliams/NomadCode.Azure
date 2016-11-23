@@ -4,9 +4,7 @@ NomadCode.Azure is a very simple [shared project][0] that simplifies Azure Mobil
 
 ## Installation
 
-To use in your project, you can eiter, clone, [download][1], etc. and simply reference it from your project.
-
-Or if you're using Git, you can add it as a submodule with the following command:
+To use in your project, you can either, clone, [download][1], etc. and reference your local copy int your project, orr if you're using Git, you can add it as a submodule with the following command:
 
 ```shell
 cd /path/to/your/projects/root
@@ -54,10 +52,6 @@ If your app does not support offline sync, simply call `Initialize`, passing in 
 AzureClient.Shared.Initialize ("https://{your-app}.azurewebsites.net");
 ```
 
-### Authentication
-
-
-
 ### CRUD
 
 Once the `AzureClient` is initialized, you can use the methods below to perform CRUD opperations on your data:
@@ -65,7 +59,7 @@ Once the `AzureClient` is initialized, you can use the methods below to perform 
 ```C#
 AzureClient client = AzureClient.Shared;
 
-
+// only with offline sync
 await client.SyncAsync<User> ();                                // pushes local and pulls remote changes
 
 
@@ -92,5 +86,36 @@ await client.DeleteAsync (new List<User> { user });             // deletes each 
 await client.DeleteAsync<User> (u => u.Age < 34);               // deletes all users where age < 34
 ```
 
+### Authentication
+
+NomadCode.Azure also supports handeling the [server-managed authentication][2] for your app, incuding storing relevant items in the keychain to silently re-authenticate users later.     
+
+To Authenticate a user, you must first set the `AuthProvider` to the [`MobileServiceAuthenticationProvider`][3] you want to use.
+
+```C#
+AzureClient.Shared.AuthProvider = MobileServiceAuthenticationProvider.Facebook;
+```
+If you do not set a value for `AuthProvider`, it will default to use `WindowsAzureActiveDirectory`.  
+
+Then you can authenticate the user by calling `AuthenticateAsync`, passing a `UIViewController` on iOS and an `Activity` on Android:
+
+```C#
+if (AzureClient.Shared.AuthenticateAsync (this))
+{
+    // CRUD
+}
+```
+
+Finally, you can logout the user by calling `LogoutAsync`.
+
+```C#
+AzureClient.Shared.LogoutAsync();
+```
+
+This will also purge all local data.
+
+
 [0]:https://developer.xamarin.com/guides/cross-platform/application_fundamentals/shared_projects/
 [1]:https://github.com/colbylwilliams/NomadCode.Azure/archive/master.zip
+[2]:https://docs.microsoft.com/en-us/azure/app-service-mobile/app-service-mobile-dotnet-how-to-use-client-library#serverflow
+[3]:https://msdn.microsoft.com/library/azure/microsoft.windowsazure.mobileservices.mobileserviceauthenticationprovider(v=azure.10).aspx

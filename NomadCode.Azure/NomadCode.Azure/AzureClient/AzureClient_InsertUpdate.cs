@@ -1,15 +1,14 @@
-﻿//#define OFFLINE_SYNC_ENABLED
-#if __MOBILE__
+﻿#if __MOBILE__
 
 using System;
-using System.Linq.Expressions;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Microsoft.WindowsAzure.MobileServices;
 
 #if OFFLINE_SYNC_ENABLED
+using System.Linq.Expressions;
 using Microsoft.WindowsAzure.MobileServices.Sync;
-using System.Collections.Generic;
 #endif
 
 
@@ -21,7 +20,7 @@ namespace NomadCode.Azure
 #if OFFLINE_SYNC_ENABLED
 		async Task insertAsync<T> (IMobileServiceSyncTable<T> table, T item, Expression<Func<T, bool>> where = null, bool pull = true)
 #else
-		async Task insertAsync<T> (IMobileServiceTable<T> table, T item, Expression<Func<T, bool>> where = null, bool pull = true)
+		async Task insertAsync<T> (IMobileServiceTable<T> table, T item)
 #endif
 			where T : AzureEntity, new()
 		{
@@ -49,13 +48,13 @@ namespace NomadCode.Azure
 			}
 			catch (Exception e)
 			{
-				LogDebug<T> (e);
+				logDebug<T> (e);
 				throw;
 			}
 			finally
 			{
 				sw.Stop ();
-				LogDebug<T> (sw.ElapsedMilliseconds);
+				logDebug<T> (sw.ElapsedMilliseconds);
 #endif
 			}
 		}
@@ -64,7 +63,7 @@ namespace NomadCode.Azure
 #if OFFLINE_SYNC_ENABLED
 		async Task updateAsync<T> (IMobileServiceSyncTable<T> table, T item, Expression<Func<T, bool>> where = null, bool pull = true)
 #else
-		async Task updateAsync<T> (IMobileServiceTable<T> table, T item, Expression<Func<T, bool>> where = null, bool pull = true)
+		async Task updateAsync<T> (IMobileServiceTable<T> table, T item)
 #endif
 			where T : AzureEntity, new()
 		{
@@ -85,7 +84,7 @@ namespace NomadCode.Azure
 			}
 			catch (MobileServicePreconditionFailedException<T> preconditionFailed)
 			{
-				Log ($"UpdateItemAsync for {typeof (T).Name} failed due to a conflict detected between the local and server version : {(preconditionFailed.InnerException ?? preconditionFailed).Message}");
+				log ($"UpdateItemAsync for {typeof (T).Name} failed due to a conflict detected between the local and server version : {(preconditionFailed.InnerException ?? preconditionFailed).Message}");
 
 				// To resolve the conflict, update the version of the item being committed. Otherwise, 
 				// it will continue to throw MobileServicePreConditionFailedExceptions
@@ -103,13 +102,13 @@ namespace NomadCode.Azure
 			}
 			catch (Exception e)
 			{
-				LogDebug<T> (e);
+				logDebug<T> (e);
 				throw;
 			}
 			finally
 			{
 				sw.Stop ();
-				LogDebug<T> (sw.ElapsedMilliseconds);
+				logDebug<T> (sw.ElapsedMilliseconds);
 #endif
 			}
 		}
@@ -118,16 +117,23 @@ namespace NomadCode.Azure
 #if OFFLINE_SYNC_ENABLED
 		Task insertOrUpdateAsync<T> (IMobileServiceSyncTable<T> table, T item, Expression<Func<T, bool>> where = null, bool pull = true)
 #else
-		Task insertOrUpdateAsync<T> (IMobileServiceTable<T> table, T item, Expression<Func<T, bool>> where = null, bool pull = true)
+		Task insertOrUpdateAsync<T> (IMobileServiceTable<T> table, T item)
 #endif
 			where T : AzureEntity, new()
 		{
 			if (item.UpdatedAt.HasValue)
 			{
+#if OFFLINE_SYNC_ENABLED
 				return updateAsync (table, item, where, pull);
+#else
+				return updateAsync (table, item);
+#endif
 			}
-
+#if OFFLINE_SYNC_ENABLED
 			return insertAsync (table, item, where, pull);
+#else
+			return insertAsync (table, item);
+#endif
 		}
 
 
@@ -135,7 +141,7 @@ namespace NomadCode.Azure
 #if OFFLINE_SYNC_ENABLED
 		async Task insertOrUpdateAsync<T> (IMobileServiceSyncTable<T> table, List<T> items, Expression<Func<T, bool>> where = null, bool pull = true)
 #else
-		async Task insertOrUpdateAsync<T> (IMobileServiceTable<T> table, List<T> items, Expression<Func<T, bool>> where = null, bool pull = true)
+		async Task insertOrUpdateAsync<T> (IMobileServiceTable<T> table, List<T> items)
 #endif
 			where T : AzureEntity, new()
 		{
@@ -149,11 +155,19 @@ namespace NomadCode.Azure
 				{
 					if (item.HasId && item.UpdatedAt.HasValue)
 					{
-						await updateAsync (table, item, null, false);
+#if OFFLINE_SYNC_ENABLED
+						await updateAsync (table, item, where, false);
+#else
+						await updateAsync (table, item);
+#endif
 					}
 					else
 					{
-						await insertAsync (table, item, null, false);
+#if OFFLINE_SYNC_ENABLED
+						await insertAsync (table, item, where, false);
+#else
+						await insertAsync (table, item);
+#endif
 					}
 				}
 #if OFFLINE_SYNC_ENABLED
@@ -172,13 +186,13 @@ namespace NomadCode.Azure
 			}
 			catch (Exception e)
 			{
-				LogDebug<T> (e);
+				logDebug<T> (e);
 				throw;
 			}
 			finally
 			{
 				sw.Stop ();
-				LogDebug<T> (sw.ElapsedMilliseconds);
+				logDebug<T> (sw.ElapsedMilliseconds);
 #endif
 			}
 		}
