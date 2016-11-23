@@ -1,4 +1,4 @@
-# `NomadCode.Azure`
+# NomadCode.Azure
 
 `NomadCode.Azure` is a very simple [shared project][0] that simplifies Azure Mobile Apps.
 
@@ -116,8 +116,18 @@ AzureClient.Shared.LogoutAsync();
 
 This will also purge all local data.
 
+# About
+
+Created by [Colby Williams][5]. 
+
+
+## License
+
+Licensed under the MIT License (MIT).  See [LICENSE][4] for details.
 
 [0]:https://developer.xamarin.com/guides/cross-platform/application_fundamentals/shared_projects/
 [1]:https://github.com/colbylwilliams/NomadCode.Azure/archive/master.zip
 [2]:https://docs.microsoft.com/en-us/azure/app-service-mobile/app-service-mobile-dotnet-how-to-use-client-library#serverflow
 [3]:https://msdn.microsoft.com/library/azure/microsoft.windowsazure.mobileservices.mobileserviceauthenticationprovider(v=azure.10).aspx
+[4]:https://github.com/colbylwilliams/NomadCode.Azure/blob/master/LICENSE
+[5]:https://github.com/colbylwilliams
