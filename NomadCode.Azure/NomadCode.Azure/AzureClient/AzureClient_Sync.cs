@@ -29,7 +29,7 @@ namespace NomadCode.Azure
 					{
 						performingFullRefresh = true;
 
-						await getAsync<T> (null);
+						await getAsync (table, null);
 
 						lastRefresh = DateTime.UtcNow;
 
