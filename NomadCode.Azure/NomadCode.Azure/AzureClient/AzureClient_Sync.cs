@@ -36,10 +36,16 @@ namespace NomadCode.Azure
 						performingFullRefresh = false;
 					}
 				}
-				catch (Exception ex)
+#if !DEBUG
+				catch (Exception)
 				{
-					logDebug<T> (ex);
+#else
+				catch (Exception e)
+				{
+					logDebug<T> (e);
+#endif
 					lastRefresh = default (DateTime);
+					throw;
 				}
 			});
 		}
@@ -58,7 +64,7 @@ namespace NomadCode.Azure
 
 				var queryId = where == null ? $"{table?.TableName ?? typeof (T).Name}" : $"{table?.TableName ?? typeof (T).Name}{syncQueryFormat}";
 
-				// pull executed against a table that has pending local updates tracked by the context 
+				// pull executed against a table that has pending local updates tracked by the context
 				// automatically triggers a context push first, doing so manually is redundant
 				await table?.PullAsync (queryId, query);
 			}
