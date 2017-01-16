@@ -124,7 +124,7 @@ namespace NomadCode.Azure
 #endif
 			where T : AzureEntity, new()
 		{
-			if (item.UpdatedAt.HasValue)
+			if (item.HasId)
 			{
 #if OFFLINE_SYNC_ENABLED
 				return updateAsync (table, item, where, pull);
@@ -156,7 +156,7 @@ namespace NomadCode.Azure
 			{
 				foreach (var item in items)
 				{
-					if (item.HasId && item.UpdatedAt.HasValue)
+					if (item.HasId)
 					{
 #if OFFLINE_SYNC_ENABLED
 						await updateAsync (table, item, where, false);
