@@ -22,6 +22,22 @@ namespace NomadCode.Azure
 			await syncAsync (getTable<T> ());
 		}
 
+
+		/// <summary>
+		/// Inserts or updates the items and waits to return until after a sync has finished.
+		/// </summary>
+		/// <param name="item">Item.</param>
+		/// <typeparam name="T">The Table to save to.</typeparam>
+		public async Task SaveRemoteAsync<T> (T item)
+			where T : AzureEntity, new()
+		{
+			var table = getTable<T> ();
+
+			await insertOrUpdateAsync (table, item, null, false);
+
+			await syncAsync (table);
+		}
+
 #endif
 
 		/// <summary>
