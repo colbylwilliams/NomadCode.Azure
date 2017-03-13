@@ -31,6 +31,8 @@ namespace NomadCode.Azure
 		static MobileServiceClient Client => _client ?? (_client = new MobileServiceClient (appUri));
 
 
+		public MobileServiceClient MobileServiceClient => Client;
+
 		#region tables
 
 #if OFFLINE_SYNC_ENABLED
