@@ -21,79 +21,76 @@ using Android.Content;
 
 namespace NomadCode.Azure
 {
-	public partial class AzureClient // Keychain
-	{
+    public partial class AzureClient // Keychain
+    {
 
 #if __IOS__
 
-		SecRecord genericRecord (string service) => new SecRecord (SecKind.GenericPassword)
-		{
-			Service = $"{NSBundle.MainBundle.BundleIdentifier}-{service}",
-			ApplicationLabel = NSBundle.MainBundle.BundleIdentifier
-		};
+        SecRecord genericRecord (string service) => new SecRecord (SecKind.GenericPassword)
+        {
+            Service = $"{NSBundle.MainBundle.BundleIdentifier}-{service}"
+        };
 
 
-		Tuple<string, string> getItemFromKeychain (string service)
-		{
-			SecStatusCode status;
+        (string Account, string PrivateKey) getItemFromKeychain (string service)
+        {
+            var record = SecKeyChain.QueryAsRecord (genericRecord (service), out SecStatusCode status);
 
-			var record = SecKeyChain.QueryAsRecord (genericRecord (service), out status);
+            if (status == SecStatusCode.Success && record != null)
+            {
+                var account = record.Account;
 
-			if (status == SecStatusCode.Success && record != null)
-			{
-				var account = record.Account;
+                var privateKey = NSString.FromData (record.ValueData, NSStringEncoding.UTF8).ToString ();
 
-				var privateKey = NSString.FromData (record.ValueData, NSStringEncoding.UTF8).ToString ();
+                return (account, privateKey);
+            }
 
-				return new Tuple<string, string> (account, privateKey);
-			}
-
-			return null;
-		}
+            return (null, null);
+        }
 
 
-		bool saveItemToKeychain (string service, string account, string privateKey)
-		{
-			var record = genericRecord (service);
+        bool saveItemToKeychain (string service, string account, string privateKey)
+        {
+            var record = genericRecord (service);
 
-			record.Account = account;
+            record.Account = account;
 
-			record.ValueData = NSData.FromString (privateKey, NSStringEncoding.UTF8);
+            record.ValueData = NSData.FromString (privateKey, NSStringEncoding.UTF8);
 
-			// Delete any existing items
-			SecKeyChain.Remove (record);
+            // Delete any existing items
+            SecKeyChain.Remove (record);
 
-			// Add the new keychain item
-			var status = SecKeyChain.Add (record);
+            // Add the new keychain item
+            var status = SecKeyChain.Add (record);
 
-			var success = status == SecStatusCode.Success;
+            var success = status == SecStatusCode.Success;
 
-			if (!success)
-			{
-				System.Diagnostics.Debug.WriteLine ($"Error in Keychain: {status}");
-				System.Diagnostics.Debug.WriteLine ($"If you are seeing error code '-34018' got to Project Options -> iOS Bundle Signing -> make sure Entitlements.plist is populated for Custom Entitlements for iPhoneSimulator configs");
-			}
+            if (!success)
+            {
+                System.Diagnostics.Debug.WriteLine ($"Error in Keychain: {status}");
+                System.Diagnostics.Debug.WriteLine ($"If you are seeing error code '-34018' got to Project Options -> iOS Bundle Signing -> make sure Entitlements.plist is populated for Custom Entitlements for iPhoneSimulator configs");
+            }
 
-			return success;
-		}
+            return success;
+        }
 
 
-		bool removeItemFromKeychain (string service)
-		{
-			var record = genericRecord (service);
+        bool removeItemFromKeychain (string service)
+        {
+            var record = genericRecord (service);
 
-			var status = SecKeyChain.Remove (record);
+            var status = SecKeyChain.Remove (record);
 
-			var success = status == SecStatusCode.Success;
+            var success = status == SecStatusCode.Success;
 
-			if (!success)
-			{
-				System.Diagnostics.Debug.WriteLine ($"Error in Keychain: {status}");
-				System.Diagnostics.Debug.WriteLine ($"If you are seeing error code '-34018' got to Project Options -> iOS Bundle Signing -> make sure Entitlements.plist is populated for Custom Entitlements for iPhoneSimulator configs");
-			}
+            if (!success)
+            {
+                System.Diagnostics.Debug.WriteLine ($"Error in Keychain: {status}");
+                System.Diagnostics.Debug.WriteLine ($"If you are seeing error code '-34018' got to Project Options -> iOS Bundle Signing -> make sure Entitlements.plist is populated for Custom Entitlements for iPhoneSimulator configs");
+            }
 
-			return success;
-		}
+            return success;
+        }
 
 #else
 
@@ -222,6 +219,6 @@ namespace NomadCode.Azure
 		}
 
 #endif
-	}
+    }
 }
 #endif

@@ -20,6 +20,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)AzureClient\PreferenceStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AzureClient\AzureClient_CRUD.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AzureClient\Log.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AzureClient\AzureClient_Invoke.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)AzureClient\" />
