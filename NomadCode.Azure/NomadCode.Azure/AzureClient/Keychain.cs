@@ -21,8 +21,8 @@ using Android.Content;
 
 namespace NomadCode.Azure
 {
-    public partial class AzureClient // Keychain
-    {
+	public partial class AzureClient // Keychain
+	{
 
 #if __IOS__
 
@@ -135,7 +135,7 @@ namespace NomadCode.Azure
 		}
 
 
-		Tuple<string, string> getItemFromKeychain (string service)
+		(string Account, string PrivateKey) getItemFromKeychain (string service)
 		{
 			var context = Android.App.Application.Context;
 
@@ -159,11 +159,11 @@ namespace NomadCode.Azure
 
 					var serialized = System.Text.Encoding.UTF8.GetString (bytes);
 
-					return new Tuple<string, string> (alias, serialized);
+					return (alias, serialized);
 				}
 			}
 
-			return null;
+			return (null, null);
 		}
 
 
@@ -219,6 +219,6 @@ namespace NomadCode.Azure
 		}
 
 #endif
-    }
+	}
 }
 #endif
