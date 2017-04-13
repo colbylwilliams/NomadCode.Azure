@@ -123,8 +123,6 @@ namespace NomadCode.Azure
                     {
                         MobileServiceAuthenticationToken = creds.PrivateKey
                     };
-                    logDebug ($"Client.CurrentUser.UserId: {Client.CurrentUser.UserId}");
-                    logDebug ($"Client.CurrentUser.MobileServiceAuthenticationToken: {Client.CurrentUser.MobileServiceAuthenticationToken}");
                 }
 
                 return (Authenticated, (Authenticated ? Client.CurrentUser.UserId : null));
