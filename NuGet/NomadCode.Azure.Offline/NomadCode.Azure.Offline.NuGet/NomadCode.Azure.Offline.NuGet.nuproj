@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(NuGetAuthoringPath)\NuGet.Packaging.Authoring.props" Condition="Exists('$(NuGetAuthoringPath)\NuGet.Packaging.Authoring.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{494D0BF8-59E9-46C9-9452-5DCF51517CB9}</ProjectGuid>
+    <Description>A library to simplify working with data in Azure Mobile Apps.</Description>
+    <PackageId>NomadCode.Azure.Offline</PackageId>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Authors>Colby Williams</Authors>
+    <DevelopmentDependency>false</DevelopmentDependency>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>NomadCode.Azure.Offline</RootNamespace>
+    <UsePartialTypes>false</UsePartialTypes>
+    <AssemblyName>NomadCode.Azure.Offline.NuGet</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <Owners>Colby Williams</Owners>
+    <Copyright>Copyright © 2017 Colby Williams</Copyright>
+    <Title>NomadCode.Azure.Offline</Title>
+    <Summary>A library to simplify working with data in Azure Mobile Apps.</Summary>
+    <PackageProjectUrl>https://github.com/colbylwilliams/NomadCode.Azure</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/colbylwilliams/NomadCode.Azure/blob/master/LICENSE</PackageLicenseUrl>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <OutputPath>bin\Debug</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NomadCode.Azure.Offline.Android\NomadCode.Azure.Offline.Android.csproj">
+      <Project>{30646D65-AC6B-47DB-B369-B826F45B2996}</Project>
+      <Name>NomadCode.Azure.Offline.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NomadCode.Azure.Offline.iOS\NomadCode.Azure.Offline.iOS.csproj">
+      <Project>{285A559F-548D-4307-AF80-7CDCC9050C71}</Project>
+      <Name>NomadCode.Azure.Offline.iOS</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NuGet.Build.Packaging">
+      <Version>0.1.157-dev</Version>
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.Common.targets" />
+  <Import Project="$(NuGetAuthoringPath)\NuGet.Packaging.Authoring.targets" Condition="Exists('$(NuGetAuthoringPath)\NuGet.Packaging.Authoring.targets')" />
+</Project>

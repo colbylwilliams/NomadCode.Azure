@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(NuGetAuthoringPath)\NuGet.Packaging.Authoring.props" Condition="Exists('$(NuGetAuthoringPath)\NuGet.Packaging.Authoring.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{795430C4-8117-4407-BDFD-DA888EB776F2}</ProjectGuid>
+    <Description>A library to simplify working with data in Azure Mobile Apps.</Description>
+    <PackageId>NomadCode.Azure</PackageId>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Authors>Colby Williams</Authors>
+    <DevelopmentDependency>false</DevelopmentDependency>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>NomadCode.Azure</RootNamespace>
+    <UsePartialTypes>false</UsePartialTypes>
+    <AssemblyName>NomadCode.Azure.NuGet</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <Owners>Colby Williams</Owners>
+    <Copyright>Copyright © 2017 Colby Williams</Copyright>
+    <Title>NomadCode.Azure</Title>
+    <Summary>A library to simplify working with data in Azure Mobile Apps.</Summary>
+    <PackageProjectUrl>https://github.com/colbylwilliams/NomadCode.Azure</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/colbylwilliams/NomadCode.Azure/blob/master/LICENSE</PackageLicenseUrl>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <OutputPath>bin\Debug</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NomadCode.Azure.Android\NomadCode.Azure.Android.csproj">
+      <Project>{2C07D49B-4070-4CBB-B92E-98846DBEF200}</Project>
+      <Name>NomadCode.Azure.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NomadCode.Azure.iOS\NomadCode.Azure.iOS.csproj">
+      <Project>{2DCAE245-CDBB-437F-BEE4-C05BA1000122}</Project>
+      <Name>NomadCode.Azure.iOS</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NuGet.Build.Packaging">
+      <Version>0.1.157-dev</Version>
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.Common.targets" />
+  <Import Project="$(NuGetAuthoringPath)\NuGet.Packaging.Authoring.targets" Condition="Exists('$(NuGetAuthoringPath)\NuGet.Packaging.Authoring.targets')" />
+</Project>

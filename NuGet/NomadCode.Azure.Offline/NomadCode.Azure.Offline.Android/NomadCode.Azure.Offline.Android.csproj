@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\NuGet.Build.Packaging.0.1.157-dev\build\NuGet.Build.Packaging.props" Condition="Exists('..\packages\NuGet.Build.Packaging.0.1.157-dev\build\NuGet.Build.Packaging.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{30646D65-AC6B-47DB-B369-B826F45B2996}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>NomadCode.Azure.Offline</RootNamespace>
+    <AssemblyName>NomadCode.Azure.Offline</AssemblyName>
+    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
+    <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;OFFLINE_SYNC_ENABLED;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidLinkMode>None</AndroidLinkMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <DefineConstants>OFFLINE_SYNC_ENABLED;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidManagedSymbols>true</AndroidManagedSymbols>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Mono.Android" />
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\monoandroid\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\monoandroid\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Mobile">
+      <HintPath>..\packages\Microsoft.Azure.Mobile.Client.3.1.0\lib\monoandroid\Microsoft.WindowsAzure.Mobile.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Mobile.Ext">
+      <HintPath>..\packages\Microsoft.Azure.Mobile.Client.3.1.0\lib\monoandroid\Microsoft.WindowsAzure.Mobile.Ext.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.core">
+      <HintPath>..\packages\SQLitePCLRaw.core.1.1.2\lib\MonoAndroid\SQLitePCLRaw.core.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.lib.e_sqlite3">
+      <HintPath>..\packages\SQLitePCLRaw.lib.e_sqlite3.android.1.1.2\lib\MonoAndroid\SQLitePCLRaw.lib.e_sqlite3.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.provider.e_sqlite3">
+      <HintPath>..\packages\SQLitePCLRaw.provider.e_sqlite3.android.1.1.2\lib\MonoAndroid\SQLitePCLRaw.provider.e_sqlite3.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_green">
+      <HintPath>..\packages\SQLitePCLRaw.bundle_green.1.1.2\lib\MonoAndroid\SQLitePCLRaw.batteries_green.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_v2">
+      <HintPath>..\packages\SQLitePCLRaw.bundle_green.1.1.2\lib\MonoAndroid\SQLitePCLRaw.batteries_v2.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Mobile.SQLiteStore">
+      <HintPath>..\packages\Microsoft.Azure.Mobile.Client.SQLiteStore.3.1.0\lib\portable-win+net45+wp8+wpa81+monotouch10+monoandroid10+xamarinios10\Microsoft.WindowsAzure.Mobile.SQLiteStore.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="..\..\..\NomadCode.Azure\NomadCode.Azure\NomadCode.Azure.projitems" Label="Shared" Condition="Exists('..\..\..\NomadCode.Azure\NomadCode.Azure\NomadCode.Azure.projitems')" />
+  <Import Project="..\NomadCode.Azure.Offline.Shared\NomadCode.Azure.Offline.Shared.projitems" Label="Shared" Condition="Exists('..\NomadCode.Azure.Offline.Shared\NomadCode.Azure.Offline.Shared.projitems')" />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <Import Project="..\packages\NuGet.Build.Packaging.0.1.157-dev\build\NuGet.Build.Packaging.targets" Condition="Exists('..\packages\NuGet.Build.Packaging.0.1.157-dev\build\NuGet.Build.Packaging.targets')" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+</Project>
