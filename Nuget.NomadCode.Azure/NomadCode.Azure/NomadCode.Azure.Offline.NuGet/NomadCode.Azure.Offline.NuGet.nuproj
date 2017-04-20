@@ -7,7 +7,7 @@
     <ProjectGuid>{9AE0F327-1C29-4126-B795-9139CF4E2720}</ProjectGuid>
     <Description>A library to simplify working with data in Azure Mobile Apps.</Description>
     <PackageId>NomadCode.Azure.Offline</PackageId>
-    <PackageVersion>1.0.2</PackageVersion>
+    <PackageVersion>1.0.3</PackageVersion>
     <Authors>Colby Williams</Authors>
     <DevelopmentDependency>false</DevelopmentDependency>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -23,7 +23,7 @@
     <PackageProjectUrl>https://github.com/colbylwilliams/NomadCode.Azure</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/colbylwilliams/NomadCode.Azure/blob/master/LICENSE</PackageLicenseUrl>
     <PackageTags>NomadCode, Xamarin, Xamarin.iOS, Xamarin.Android, iOS, Android, Azure, Mobile, Apps</PackageTags>
-    <PackageReleaseNotes>Includes dll for server side consumption and package no longer contains all dependencies</PackageReleaseNotes>
+    <PackageReleaseNotes>Server proj to target v4.6</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
