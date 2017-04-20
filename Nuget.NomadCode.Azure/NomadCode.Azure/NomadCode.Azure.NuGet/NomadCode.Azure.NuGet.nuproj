@@ -18,7 +18,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <Owners>colbylwilliams</Owners>
     <Copyright>Copyright © 2017 Colby Williams</Copyright>
-    <Title>NomadCode.Azure.Offline</Title>
+    <Title>NomadCode.Azure</Title>
     <Summary>A library to simplify working with data in Azure Mobile Apps.</Summary>
     <PackageProjectUrl>https://github.com/colbylwilliams/NomadCode.Azure</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/colbylwilliams/NomadCode.Azure/blob/master/LICENSE</PackageLicenseUrl>
