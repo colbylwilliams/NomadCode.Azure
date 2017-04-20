@@ -7,8 +7,8 @@
     <ProjectGuid>{0178C2B0-EAB9-441A-95E2-04C9204318D3}</ProjectGuid>
     <Description>A simple library to make working with data in Azure Mobile Apps easier.</Description>
     <PackageId>NomadCode.Azure</PackageId>
-    <PackageVersion>1.0.0</PackageVersion>
-    <Authors>colbywilliams</Authors>
+    <PackageVersion>1.0.1</PackageVersion>
+    <Authors>Colby Williams</Authors>
     <DevelopmentDependency>false</DevelopmentDependency>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <OutputType>Exe</OutputType>
@@ -16,6 +16,14 @@
     <UsePartialTypes>false</UsePartialTypes>
     <AssemblyName>NomadCode.Azure.NuGet</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <Owners>colbylwilliams</Owners>
+    <Copyright>Copyright © 2017 Colby Williams</Copyright>
+    <Title>NomadCode.Azure.Offline</Title>
+    <Summary>A library to simplify working with data in Azure Mobile Apps.</Summary>
+    <PackageProjectUrl>https://github.com/colbylwilliams/NomadCode.Azure</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/colbylwilliams/NomadCode.Azure/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageTags>NomadCode, Xamarin, Xamarin.iOS, Xamarin.Android, iOS, Android, Azure, Mobile, Apps</PackageTags>
+    <PackageReleaseNotes>Package no longer contains all dependencies</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
