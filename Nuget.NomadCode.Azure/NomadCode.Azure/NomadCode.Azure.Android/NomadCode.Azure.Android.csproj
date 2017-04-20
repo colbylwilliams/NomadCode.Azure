@@ -63,7 +63,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="..\..\..\NomadCode.Azure\NomadCode.Azure\NomadCode.Azure.projitems" Label="Shared" Condition="Exists('..\..\..\NomadCode.Azure\NomadCode.Azure\NomadCode.Azure.projitems')" />
-  <Import Project="..\NomadCode.Azure.Shared\NomadCode.Azure.Shared.projitems" Label="Shared" Condition="Exists('..\NomadCode.Azure.Shared\NomadCode.Azure.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\NuGet.Build.Packaging.0.1.157-dev\build\NuGet.Build.Packaging.targets" Condition="Exists('..\packages\NuGet.Build.Packaging.0.1.157-dev\build\NuGet.Build.Packaging.targets')" />
 </Project>

@@ -1,8 +1,6 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NomadCode.Azure.Shared", "NomadCode.Azure.Shared\NomadCode.Azure.Shared.shproj", "{810C9AC0-104A-4AA3-BDF7-2B9B39D10D0D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NomadCode.Azure.iOS", "NomadCode.Azure.iOS\NomadCode.Azure.iOS.csproj", "{4E718AE9-A6FB-4C0E-A989-415B8DF6DC96}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NomadCode.Azure.Android", "NomadCode.Azure.Android\NomadCode.Azure.Android.csproj", "{4C546742-1B91-4CA9-8EC8-D2C9DB25650E}"
@@ -10,6 +8,12 @@ EndProject
 Project("{5DD5E4FA-CB73-4610-85AB-557B54E96AA9}") = "NomadCode.Azure.NuGet", "NomadCode.Azure.NuGet\NomadCode.Azure.NuGet.nuproj", "{0178C2B0-EAB9-441A-95E2-04C9204318D3}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NomadCode.Azure", "..\..\NomadCode.Azure\NomadCode.Azure\NomadCode.Azure.shproj", "{049FF267-02CB-4168-9EC5-0768D053EF77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NomadCode.Azure.Offline.iOS", "NomadCode.Azure.Offline.iOS\NomadCode.Azure.Offline.iOS.csproj", "{45FE8C46-8A01-4EC3-8354-FF3D62423E7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NomadCode.Azure.Offline.Android", "NomadCode.Azure.Offline.Android\NomadCode.Azure.Offline.Android.csproj", "{BA9F0C97-C4C9-4F70-A11E-EAEB0A7FADAC}"
+EndProject
+Project("{5DD5E4FA-CB73-4610-85AB-557B54E96AA9}") = "NomadCode.Azure.Offline.NuGet", "NomadCode.Azure.Offline.NuGet\NomadCode.Azure.Offline.NuGet.nuproj", "{9AE0F327-1C29-4126-B795-9139CF4E2720}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,5 +33,17 @@ Global
 		{0178C2B0-EAB9-441A-95E2-04C9204318D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0178C2B0-EAB9-441A-95E2-04C9204318D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0178C2B0-EAB9-441A-95E2-04C9204318D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45FE8C46-8A01-4EC3-8354-FF3D62423E7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45FE8C46-8A01-4EC3-8354-FF3D62423E7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45FE8C46-8A01-4EC3-8354-FF3D62423E7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45FE8C46-8A01-4EC3-8354-FF3D62423E7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA9F0C97-C4C9-4F70-A11E-EAEB0A7FADAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA9F0C97-C4C9-4F70-A11E-EAEB0A7FADAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA9F0C97-C4C9-4F70-A11E-EAEB0A7FADAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA9F0C97-C4C9-4F70-A11E-EAEB0A7FADAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AE0F327-1C29-4126-B795-9139CF4E2720}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AE0F327-1C29-4126-B795-9139CF4E2720}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AE0F327-1C29-4126-B795-9139CF4E2720}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AE0F327-1C29-4126-B795-9139CF4E2720}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

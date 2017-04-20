@@ -4,11 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{738C3005-28E4-45F2-8E21-A60987C389F9}</ProjectGuid>
+    <ProjectGuid>{9AE0F327-1C29-4126-B795-9139CF4E2720}</ProjectGuid>
     <Description>A library to simplify working with data in Azure Mobile Apps.</Description>
     <PackageId>NomadCode.Azure.Offline</PackageId>
-    <PackageVersion>1.0.0</PackageVersion>
+    <PackageVersion>1.0.1</PackageVersion>
     <Authors>Colby Williams</Authors>
+    <DevelopmentDependency>false</DevelopmentDependency>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <OutputType>Exe</OutputType>
     <RootNamespace>NomadCode.Azure.Offline</RootNamespace>
@@ -18,10 +19,11 @@
     <Owners>colbylwilliams</Owners>
     <Copyright>Copyright © 2017 Colby Williams</Copyright>
     <Title>NomadCode.Azure.Offline</Title>
-    <PackageReleaseNotes>Package no longer contains all dependencies</PackageReleaseNotes>
-    <Summary>A simple library to make working with data in Azure Mobile Apps easier.</Summary>
+    <Summary>A library to simplify working with data in Azure Mobile Apps.</Summary>
     <PackageProjectUrl>https://github.com/colbylwilliams/NomadCode.Azure</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/colbylwilliams/NomadCode.Azure/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageTags>NomadCode, Xamarin, Xamarin.iOS, Xamarin.Android, iOS, Android, Azure, Mobile, Apps</PackageTags>
+    <PackageReleaseNotes>Package no longer contains all dependencies</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,11 +37,11 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\NomadCode.Azure.Offline.Android\NomadCode.Azure.Offline.Android.csproj">
-      <Project>{8B686FFC-5738-41B7-BD36-795D8C05A0C5}</Project>
+      <Project>{BA9F0C97-C4C9-4F70-A11E-EAEB0A7FADAC}</Project>
       <Name>NomadCode.Azure.Offline.Android</Name>
     </ProjectReference>
     <ProjectReference Include="..\NomadCode.Azure.Offline.iOS\NomadCode.Azure.Offline.iOS.csproj">
-      <Project>{C195215C-74B2-4426-A753-A2A54299A446}</Project>
+      <Project>{45FE8C46-8A01-4EC3-8354-FF3D62423E7B}</Project>
       <Name>NomadCode.Azure.Offline.iOS</Name>
     </ProjectReference>
   </ItemGroup>
