@@ -7,7 +7,7 @@
     <ProjectGuid>{9AE0F327-1C29-4126-B795-9139CF4E2720}</ProjectGuid>
     <Description>A library to simplify working with data in Azure Mobile Apps.</Description>
     <PackageId>NomadCode.Azure.Offline</PackageId>
-    <PackageVersion>1.0.3</PackageVersion>
+    <PackageVersion>1.0.4</PackageVersion>
     <Authors>Colby Williams</Authors>
     <DevelopmentDependency>false</DevelopmentDependency>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -15,7 +15,7 @@
     <RootNamespace>NomadCode.Azure</RootNamespace>
     <UsePartialTypes>false</UsePartialTypes>
     <AssemblyName>NomadCode.Azure.Offline.NuGet</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <Owners>colbylwilliams</Owners>
     <Copyright>Copyright © 2017 Colby Williams</Copyright>
     <Title>NomadCode.Azure.Offline</Title>
@@ -23,16 +23,17 @@
     <PackageProjectUrl>https://github.com/colbylwilliams/NomadCode.Azure</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/colbylwilliams/NomadCode.Azure/blob/master/LICENSE</PackageLicenseUrl>
     <PackageTags>NomadCode, Xamarin, Xamarin.iOS, Xamarin.Android, iOS, Android, Azure, Mobile, Apps</PackageTags>
-    <PackageReleaseNotes>Server proj to target v4.6</PackageReleaseNotes>
+    <PackageReleaseNotes>Update package dependencies</PackageReleaseNotes>
+    <ReleaseVersion>1.0.4</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <OutputPath>bin\Debug</OutputPath>
+    <OutputPath>..\..\builds\Debug</OutputPath>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <OutputPath>bin\Release</OutputPath>
+    <OutputPath>..\..\builds\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
@@ -51,7 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NuGet.Build.Packaging">
-      <Version>0.1.157-dev</Version>
+      <Version>0.1.248</Version>
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
   </ItemGroup>
