@@ -7,7 +7,7 @@
     <ProjectGuid>{0178C2B0-EAB9-441A-95E2-04C9204318D3}</ProjectGuid>
     <Description>A simple library to make working with data in Azure Mobile Apps easier.</Description>
     <PackageId>NomadCode.Azure</PackageId>
-    <PackageVersion>1.0.1</PackageVersion>
+    <PackageVersion>1.0.2</PackageVersion>
     <Authors>Colby Williams</Authors>
     <DevelopmentDependency>false</DevelopmentDependency>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -23,7 +23,7 @@
     <PackageProjectUrl>https://github.com/colbylwilliams/NomadCode.Azure</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/colbylwilliams/NomadCode.Azure/blob/master/LICENSE</PackageLicenseUrl>
     <PackageTags>NomadCode, Xamarin, Xamarin.iOS, Xamarin.Android, iOS, Android, Azure, Mobile, Apps</PackageTags>
-    <PackageReleaseNotes>Package no longer contains all dependencies</PackageReleaseNotes>
+    <PackageReleaseNotes>Includes dll for server side consumption and package no longer contains all dependencies</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,6 +43,10 @@
     <ProjectReference Include="..\NomadCode.Azure.iOS\NomadCode.Azure.iOS.csproj">
       <Project>{4E718AE9-A6FB-4C0E-A989-415B8DF6DC96}</Project>
       <Name>NomadCode.Azure.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NomadCode.Azure.Server\NomadCode.Azure.Server.csproj">
+      <Project>{220C81CD-0511-4F43-8C37-D6F71E8DAE8C}</Project>
+      <Name>NomadCode.Azure.Server</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

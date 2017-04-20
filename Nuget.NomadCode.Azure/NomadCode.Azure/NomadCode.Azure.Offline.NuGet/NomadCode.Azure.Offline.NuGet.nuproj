@@ -7,12 +7,12 @@
     <ProjectGuid>{9AE0F327-1C29-4126-B795-9139CF4E2720}</ProjectGuid>
     <Description>A library to simplify working with data in Azure Mobile Apps.</Description>
     <PackageId>NomadCode.Azure.Offline</PackageId>
-    <PackageVersion>1.0.1</PackageVersion>
+    <PackageVersion>1.0.2</PackageVersion>
     <Authors>Colby Williams</Authors>
     <DevelopmentDependency>false</DevelopmentDependency>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <OutputType>Exe</OutputType>
-    <RootNamespace>NomadCode.Azure.Offline</RootNamespace>
+    <RootNamespace>NomadCode.Azure</RootNamespace>
     <UsePartialTypes>false</UsePartialTypes>
     <AssemblyName>NomadCode.Azure.Offline.NuGet</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -23,7 +23,7 @@
     <PackageProjectUrl>https://github.com/colbylwilliams/NomadCode.Azure</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/colbylwilliams/NomadCode.Azure/blob/master/LICENSE</PackageLicenseUrl>
     <PackageTags>NomadCode, Xamarin, Xamarin.iOS, Xamarin.Android, iOS, Android, Azure, Mobile, Apps</PackageTags>
-    <PackageReleaseNotes>Package no longer contains all dependencies</PackageReleaseNotes>
+    <PackageReleaseNotes>Includes dll for server side consumption and package no longer contains all dependencies</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,6 +43,10 @@
     <ProjectReference Include="..\NomadCode.Azure.Offline.iOS\NomadCode.Azure.Offline.iOS.csproj">
       <Project>{45FE8C46-8A01-4EC3-8354-FF3D62423E7B}</Project>
       <Name>NomadCode.Azure.Offline.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NomadCode.Azure.Offline.Server\NomadCode.Azure.Offline.Server.csproj">
+      <Project>{2A49FD41-2BD1-4A55-85A3-F731E273FA86}</Project>
+      <Name>NomadCode.Azure.Offline.Server</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
