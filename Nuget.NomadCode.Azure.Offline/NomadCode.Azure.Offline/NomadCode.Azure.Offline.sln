@@ -1,0 +1,33 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NomadCode.Azure", "..\..\NomadCode.Azure\NomadCode.Azure\NomadCode.Azure.shproj", "{049FF267-02CB-4168-9EC5-0768D053EF77}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NomadCode.Azure.Offline.Shared", "NomadCode.Azure.Offline.Shared\NomadCode.Azure.Offline.Shared.shproj", "{AA1C8878-56C7-49E3-81B3-69C9C0AF4B9D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NomadCode.Azure.Offline.iOS", "NomadCode.Azure.Offline.iOS\NomadCode.Azure.Offline.iOS.csproj", "{C195215C-74B2-4426-A753-A2A54299A446}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NomadCode.Azure.Offline.Android", "NomadCode.Azure.Offline.Android\NomadCode.Azure.Offline.Android.csproj", "{8B686FFC-5738-41B7-BD36-795D8C05A0C5}"
+EndProject
+Project("{5DD5E4FA-CB73-4610-85AB-557B54E96AA9}") = "NomadCode.Azure.Offline.NuGet", "NomadCode.Azure.Offline.NuGet\NomadCode.Azure.Offline.NuGet.nuproj", "{738C3005-28E4-45F2-8E21-A60987C389F9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C195215C-74B2-4426-A753-A2A54299A446}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C195215C-74B2-4426-A753-A2A54299A446}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C195215C-74B2-4426-A753-A2A54299A446}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C195215C-74B2-4426-A753-A2A54299A446}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B686FFC-5738-41B7-BD36-795D8C05A0C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B686FFC-5738-41B7-BD36-795D8C05A0C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B686FFC-5738-41B7-BD36-795D8C05A0C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B686FFC-5738-41B7-BD36-795D8C05A0C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{738C3005-28E4-45F2-8E21-A60987C389F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{738C3005-28E4-45F2-8E21-A60987C389F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{738C3005-28E4-45F2-8E21-A60987C389F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{738C3005-28E4-45F2-8E21-A60987C389F9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

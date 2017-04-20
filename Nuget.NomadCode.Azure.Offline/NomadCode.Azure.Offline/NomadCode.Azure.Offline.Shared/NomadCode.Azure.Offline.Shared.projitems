@@ -3,7 +3,7 @@
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
-    <SharedGUID>{035B3E8B-C066-465B-9976-955EF3E6B9EE}</SharedGUID>
+    <SharedGUID>{AA1C8878-56C7-49E3-81B3-69C9C0AF4B9D}</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
     <Import_RootNamespace>NomadCode.Azure.Offline</Import_RootNamespace>
