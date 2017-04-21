@@ -253,17 +253,25 @@ namespace NomadCode.Azure
 			}
 		}
 
-		(string TokenKey, string AuthKey) getClientAuthKeys ()
+		class ClientAuthKeys
+		{
+			public string TokenKey { get; set; }
+			public string AuthKey { get; set; }
+			public ClientAuthKeys () { }
+			public ClientAuthKeys (string tokenKey, string authKey) { TokenKey = tokenKey; AuthKey = authKey; }
+		}
+
+		ClientAuthKeys getClientAuthKeys ()
 		{
 			switch (AuthProvider)
 			{
 				case MobileServiceAuthenticationProvider.Facebook:
 				case MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory:
-					return ("access_token", null);
+					return new ClientAuthKeys ("access_token", null);
 				case MobileServiceAuthenticationProvider.Google:
-					return ("id_token", "authorization_code");
+					return new ClientAuthKeys ("id_token", "authorization_code");
 				case MobileServiceAuthenticationProvider.Twitter:
-					return ("access_token", "access_token_secret");
+					return new ClientAuthKeys ("access_token", "access_token_secret");
 				case MobileServiceAuthenticationProvider.MicrosoftAccount:
 					throw new NotImplementedException ("AuthProvider MobileServiceAuthenticationProvider.MicrosoftAccount does not support client-managed authenticaiton flow.");
 				default:

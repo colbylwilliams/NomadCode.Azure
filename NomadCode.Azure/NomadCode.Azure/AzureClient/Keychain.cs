@@ -24,73 +24,83 @@ namespace NomadCode.Azure
 	public partial class AzureClient // Keychain
 	{
 
+		class KeychainResult
+		{
+			public string Account { get; set; }
+			public string PrivateKey { get; set; }
+			public KeychainResult () { }
+			public KeychainResult (string account, string privateKey) { Account = account; PrivateKey = privateKey; }
+		}
+
 #if __IOS__
 
-        SecRecord genericRecord (string service) => new SecRecord (SecKind.GenericPassword)
-        {
-            Service = $"{NSBundle.MainBundle.BundleIdentifier}-{service}"
-        };
+		SecRecord genericRecord (string service) => new SecRecord (SecKind.GenericPassword)
+		{
+			Service = $"{NSBundle.MainBundle.BundleIdentifier}-{service}"
+		};
 
 
-        (string Account, string PrivateKey) getItemFromKeychain (string service)
-        {
-            var record = SecKeyChain.QueryAsRecord (genericRecord (service), out SecStatusCode status);
+		KeychainResult getItemFromKeychain (string service)
+		{
+			SecStatusCode status;
 
-            if (status == SecStatusCode.Success && record != null)
-            {
-                var account = record.Account;
+			var record = SecKeyChain.QueryAsRecord (genericRecord (service), out status);
 
-                var privateKey = NSString.FromData (record.ValueData, NSStringEncoding.UTF8).ToString ();
+			if (status == SecStatusCode.Success && record != null)
+			{
+				var account = record.Account;
 
-                return (account, privateKey);
-            }
+				var privateKey = NSString.FromData (record.ValueData, NSStringEncoding.UTF8).ToString ();
 
-            return (null, null);
-        }
+				return new KeychainResult (account, privateKey);
+			}
 
-
-        bool saveItemToKeychain (string service, string account, string privateKey)
-        {
-            var record = genericRecord (service);
-
-            record.Account = account;
-
-            record.ValueData = NSData.FromString (privateKey, NSStringEncoding.UTF8);
-
-            // Delete any existing items
-            SecKeyChain.Remove (record);
-
-            // Add the new keychain item
-            var status = SecKeyChain.Add (record);
-
-            var success = status == SecStatusCode.Success;
-
-            if (!success)
-            {
-                System.Diagnostics.Debug.WriteLine ($"Error in Keychain: {status}");
-                System.Diagnostics.Debug.WriteLine ($"If you are seeing error code '-34018' got to Project Options -> iOS Bundle Signing -> make sure Entitlements.plist is populated for Custom Entitlements for iPhoneSimulator configs");
-            }
-
-            return success;
-        }
+			return new KeychainResult ();
+		}
 
 
-        bool removeItemFromKeychain (string service)
-        {
-            var record = genericRecord (service);
+		bool saveItemToKeychain (string service, string account, string privateKey)
+		{
+			var record = genericRecord (service);
 
-            var status = SecKeyChain.Remove (record);
+			record.Account = account;
 
-            var success = status == SecStatusCode.Success;
+			record.ValueData = NSData.FromString (privateKey, NSStringEncoding.UTF8);
 
-            if (!success)
-            {
-                System.Diagnostics.Debug.WriteLine ($"Error in Keychain: {status}");
-                System.Diagnostics.Debug.WriteLine ($"If you are seeing error code '-34018' got to Project Options -> iOS Bundle Signing -> make sure Entitlements.plist is populated for Custom Entitlements for iPhoneSimulator configs");
-            }
+			// Delete any existing items
+			SecKeyChain.Remove (record);
 
-            return success;
-        }
+			// Add the new keychain item
+			var status = SecKeyChain.Add (record);
+
+			var success = status == SecStatusCode.Success;
+
+			if (!success)
+			{
+				System.Diagnostics.Debug.WriteLine ($"Error in Keychain: {status}");
+				System.Diagnostics.Debug.WriteLine ($"If you are seeing error code '-34018' got to Project Options -> iOS Bundle Signing -> make sure Entitlements.plist is populated for Custom Entitlements for iPhoneSimulator configs");
+			}
+
+			return success;
+		}
+
+
+		bool removeItemFromKeychain (string service)
+		{
+			var record = genericRecord (service);
+
+			var status = SecKeyChain.Remove (record);
+
+			var success = status == SecStatusCode.Success;
+
+			if (!success)
+			{
+				System.Diagnostics.Debug.WriteLine ($"Error in Keychain: {status}");
+				System.Diagnostics.Debug.WriteLine ($"If you are seeing error code '-34018' got to Project Options -> iOS Bundle Signing -> make sure Entitlements.plist is populated for Custom Entitlements for iPhoneSimulator configs");
+			}
+
+			return success;
+		}
 
 #else
 
@@ -104,7 +114,9 @@ namespace NomadCode.Azure
 
 			var serviceId = $"{context.PackageName}-{service}";
 
-			if (keyStoresCache.TryGetValue (serviceId, out KeyStore keystore))
+			KeyStore keystore;
+
+			if (keyStoresCache.TryGetValue (serviceId, out keystore))
 			{
 				return keystore;
 			}
@@ -134,7 +146,7 @@ namespace NomadCode.Azure
 		}
 
 
-		(string Account, string PrivateKey) getItemFromKeychain (string service)
+		KeychainResult getItemFromKeychain (string service)
 		{
 			var context = Android.App.Application.Context;
 
@@ -156,11 +168,11 @@ namespace NomadCode.Azure
 
 					var serialized = System.Text.Encoding.UTF8.GetString (bytes);
 
-					return (alias, serialized);
+					return new KeychainResult (alias, serialized);
 				}
 			}
 
-			return (null, null);
+			return new KeychainResult ();
 		}
 
 

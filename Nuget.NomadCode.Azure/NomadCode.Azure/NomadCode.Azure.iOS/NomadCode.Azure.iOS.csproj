@@ -10,7 +10,7 @@
     <RootNamespace>NomadCode.Azure</RootNamespace>
     <AssemblyName>NomadCode.Azure</AssemblyName>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <ReleaseVersion>1.0.5</ReleaseVersion>
+    <ReleaseVersion>1.0.6</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

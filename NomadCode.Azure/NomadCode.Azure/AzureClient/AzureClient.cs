@@ -15,58 +15,58 @@ using Microsoft.WindowsAzure.MobileServices.Sync;
 
 namespace NomadCode.Azure
 {
-    public partial class AzureClient
-    {
-        const string dbPath = @"nomad.db";
+	public partial class AzureClient
+	{
+		const string dbPath = @"nomad.db";
 
 
-        static Uri appUri { get; set; }
+		static Uri appUri { get; set; }
 
 
-        static AzureClient _shared;
-        public static AzureClient Shared => _shared ?? (_shared = new AzureClient());
+		static AzureClient _shared;
+		public static AzureClient Shared => _shared ?? (_shared = new AzureClient ());
 
 
-        static MobileServiceClient _client;
-        static MobileServiceClient Client => _client ?? (appUri != null ? _client = new MobileServiceClient(appUri) : throw new Exception("You must call InitializeAzync with a valid app url before attempting to use the client."));
+		static MobileServiceClient _client;
+		static MobileServiceClient Client => _client ?? (appUri != null ? _client = new MobileServiceClient (appUri) : throw new Exception ("You must call InitializeAzync with a valid app url before attempting to use the client."));
 
 
 #if OFFLINE_SYNC_ENABLED
-        public bool Initialized => appUri != null && Client.SyncContext.IsInitialized;
+		public bool Initialized => appUri != null && Client.SyncContext.IsInitialized;
 #else
         public bool Initialized => appUri != null;
 #endif
 
 
-        public MobileServiceClient MobileServiceClient => Initialized ? Client : throw new Exception("You must call InitializeAzync with a valid app url before attempting to use the client.");
+		public MobileServiceClient MobileServiceClient => Initialized ? Client : throw new Exception ("You must call InitializeAzync with a valid app url before attempting to use the client.");
 
-        #region tables
+		#region tables
 
 #if OFFLINE_SYNC_ENABLED
 
-        static Dictionary<Type, IMobileServiceSyncTable> tables = new Dictionary<Type, IMobileServiceSyncTable>();
+		static Dictionary<Type, IMobileServiceSyncTable> tables = new Dictionary<Type, IMobileServiceSyncTable> ();
 
-        IMobileServiceSyncTable<T> getTable<T>()
-            where T : AzureEntity, new()
-        {
-            if (!Client.SyncContext.IsInitialized)
-            {
-                throw new Exception("Client isn't Initialized.  Call RegisterTable on each table then call Initialize before performing CRUD operations.");
-            }
+		IMobileServiceSyncTable<T> getTable<T> ()
+			where T : AzureEntity, new()
+		{
+			if (!Client.SyncContext.IsInitialized)
+			{
+				throw new Exception ("Client isn't Initialized.  Call RegisterTable on each table then call Initialize before performing CRUD operations.");
+			}
 
-            var type = typeof(T);
+			var type = typeof (T);
 
-            if (!tables.ContainsKey(type))
-            {
-                var table = Client.GetSyncTable<T>();
+			if (!tables.ContainsKey (type))
+			{
+				var table = Client.GetSyncTable<T> ();
 
-                tables.Add(type, table);
+				tables.Add (type, table);
 
-                return table;
-            }
+				return table;
+			}
 
-            return tables[type] as IMobileServiceSyncTable<T>;
-        }
+			return tables [type] as IMobileServiceSyncTable<T>;
+		}
 
 #else
 
@@ -91,57 +91,58 @@ namespace NomadCode.Azure
 
 #endif
 
-        #endregion
+		#endregion
 
-        AzureClient()
-        {
-            CurrentPlatform.Init();
-        }
+		AzureClient ()
+		{
+			CurrentPlatform.Init ();
+		}
 
 
 #if OFFLINE_SYNC_ENABLED
 
-        MobileServiceSQLiteStore store;
+		MobileServiceSQLiteStore store;
 
-        public void RegisterTable<T>()
-            where T : AzureEntity
-        {
-            if (store == null)
-            {
-                store = new MobileServiceSQLiteStore(dbPath);
-            }
+		public void RegisterTable<T> ()
+			where T : AzureEntity
+		{
+			if (store == null)
+			{
+				store = new MobileServiceSQLiteStore (dbPath);
+			}
 
-            store.DefineTable<T>();
-        }
-
-
-        public async Task InitializeAzync(string mobileAppUri)
-        {
-            if (string.IsNullOrWhiteSpace(mobileAppUri))
-            {
-                throw new ArgumentException("Cannot be null, empty, or whitespace.", nameof(mobileAppUri));
-            }
+			store.DefineTable<T> ();
+		}
 
 
-            if (!Uri.TryCreate(mobileAppUri, UriKind.Absolute, out Uri uri))
-            {
-                throw new ArgumentException("Invalid Url", nameof(mobileAppUri));
-            }
+		public async Task InitializeAzync (string mobileAppUri)
+		{
+			if (string.IsNullOrWhiteSpace (mobileAppUri))
+			{
+				throw new ArgumentException ("Cannot be null, empty, or whitespace.", nameof (mobileAppUri));
+			}
 
-            appUri = uri;
+			Uri uri;
 
-            if (!Client.SyncContext.IsInitialized)
-            {
-                // Uses the default conflict handler, which fails on conflict
-                // To use a different conflict handler, pass a parameter to InitializeAsync.
-                // For more details, see http://go.microsoft.com/fwlink/?LinkId=521416.
-                await Client.SyncContext.InitializeAsync(store ?? (store = new MobileServiceSQLiteStore(dbPath)));
-            }
-            else
-            {
-                throw new Exception("Client already Initialized.  Call RegisterTable on each table then call Initialize ONCE.");
-            }
-        }
+			if (!Uri.TryCreate (mobileAppUri, UriKind.Absolute, out uri))
+			{
+				throw new ArgumentException ("Invalid Url", nameof (mobileAppUri));
+			}
+
+			appUri = uri;
+
+			if (!Client.SyncContext.IsInitialized)
+			{
+				// Uses the default conflict handler, which fails on conflict
+				// To use a different conflict handler, pass a parameter to InitializeAsync.
+				// For more details, see http://go.microsoft.com/fwlink/?LinkId=521416.
+				await Client.SyncContext.InitializeAsync (store ?? (store = new MobileServiceSQLiteStore (dbPath)));
+			}
+			else
+			{
+				throw new Exception ("Client already Initialized.  Call RegisterTable on each table then call Initialize ONCE.");
+			}
+		}
 
 #else
 
@@ -163,6 +164,6 @@ namespace NomadCode.Azure
 		}
 
 #endif
-    }
+	}
 }
 #endif
