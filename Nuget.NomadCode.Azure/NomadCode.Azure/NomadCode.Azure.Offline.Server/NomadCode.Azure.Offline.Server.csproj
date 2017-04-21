@@ -9,7 +9,7 @@
     <RootNamespace>NomadCode.Azure</RootNamespace>
     <AssemblyName>NomadCode.Azure.Offline</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
-    <ReleaseVersion>1.0.4</ReleaseVersion>
+    <ReleaseVersion>1.0.5</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

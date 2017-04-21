@@ -4,11 +4,21 @@ using System;
 using System.Threading.Tasks;
 
 using Microsoft.WindowsAzure.MobileServices;
+
 using Newtonsoft.Json.Linq;
 
 
 namespace NomadCode.Azure
 {
+	public class AuthenticateResult
+	{
+		public string Sid { get; set; }
+		public bool Authenticated { get; set; }
+		public AuthenticateResult () { }
+		public AuthenticateResult (bool authenticated, string sid) { Authenticated = authenticated; Sid = sid; }
+	}
+
+
 	public partial class AzureClient // Authenticate
 	{
 		public Uri AlternateLoginHost { get; set; }
@@ -25,9 +35,9 @@ namespace NomadCode.Azure
 
 
 #if __IOS__
-        public async Task<(bool Authenticated, string Sid)> AuthenticateAsync (UIKit.UIViewController view)
+        public async Task<AuthenticateResult> AuthenticateAsync (UIKit.UIViewController view)
 #else
-		public async Task<(bool Authenticated, string Sid)> AuthenticateAsync (Android.App.Activity view)
+		public async Task<AuthenticateResult> AuthenticateAsync (Android.App.Activity view)
 #endif
 		{
 #if DEBUG
@@ -62,18 +72,18 @@ namespace NomadCode.Azure
 					};
 				}
 
-				return (Authenticated, (Authenticated ? Client.CurrentUser.UserId : null));
+				return new AuthenticateResult (Authenticated, (Authenticated ? Client.CurrentUser.UserId : null));
 #if !DEBUG
 			}
 			catch (Exception)
 			{
-				return (false, null);
+				return new AuthenticateResult ();
 #else
 			}
 			catch (Exception e)
 			{
 				logDebug ($"AuthenticateAsync failed : {(e.InnerException ?? e).Message}");
-				return (false, null);
+				return new AuthenticateResult ();
 			}
 			finally
 			{
@@ -84,7 +94,7 @@ namespace NomadCode.Azure
 		}
 
 
-		public async Task<(bool Authenticated, string Sid)> AuthenticateAsync (string token = null, string authorizationCode = null)
+		public async Task<AuthenticateResult> AuthenticateAsync (string token = null, string authorizationCode = null)
 		{
 #if DEBUG
 			var sw = new System.Diagnostics.Stopwatch ();
@@ -127,18 +137,18 @@ namespace NomadCode.Azure
 					};
 				}
 
-				return (Authenticated, (Authenticated ? Client.CurrentUser.UserId : null));
+				return new AuthenticateResult (Authenticated, (Authenticated ? Client.CurrentUser.UserId : null));
 #if !DEBUG
-        	}
-        	catch (Exception)
-        	{
-        		return (false, null);
+			}
+			catch (Exception)
+			{
+				return new AuthenticateResult ();
 #else
 			}
 			catch (Exception e)
 			{
 				logDebug ($"AuthenticateAsync failed : {(e.InnerException ?? e).Message}");
-				return (false, null);
+				return new AuthenticateResult ();
 			}
 			finally
 			{
@@ -181,10 +191,10 @@ namespace NomadCode.Azure
 
 				return false;
 #if !DEBUG
-            }
-            catch (Exception)
-            {
-                return false;
+			}
+			catch (Exception)
+			{
+				return false;
 #else
 			}
 			catch (Exception e)

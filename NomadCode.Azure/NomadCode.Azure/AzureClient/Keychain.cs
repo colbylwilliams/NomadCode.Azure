@@ -101,11 +101,10 @@ namespace NomadCode.Azure
 		{
 			var context = Android.App.Application.Context;
 
-			KeyStore keystore;
 
 			var serviceId = $"{context.PackageName}-{service}";
 
-			if (keyStoresCache.TryGetValue (serviceId, out keystore))
+			if (keyStoresCache.TryGetValue (serviceId, out KeyStore keystore))
 			{
 				return keystore;
 			}
@@ -151,9 +150,7 @@ namespace NomadCode.Azure
 			{
 				var alias = aliases.NextElement ().ToString ();
 
-				var item = keystore.GetEntry (alias, protection) as KeyStore.SecretKeyEntry;
-
-				if (item != null)
+				if (keystore.GetEntry (alias, protection) is KeyStore.SecretKeyEntry item)
 				{
 					var bytes = item.SecretKey.GetEncoded ();
 
@@ -194,7 +191,8 @@ namespace NomadCode.Azure
 
 		bool removeItemFromKeychain (string service)
 		{
-			throw new NotImplementedException ();
+			return true;
+			//throw new NotImplementedException ();
 		}
 
 
